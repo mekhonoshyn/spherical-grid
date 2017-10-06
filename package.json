@@ -1,5 +1,5 @@
 {
-  "name": "iso-grid",
+  "name": "spherical-grid",
   "version": "1.0.0",
   "description": "generator of spherical hex grid with custom level of details",
   "main": "index.js",
