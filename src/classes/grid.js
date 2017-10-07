@@ -1,8 +1,8 @@
 'use strict';
 
-import Corner from 'corner';
-import Edge from 'edge';
-import Tile from 'tile';
+import Corner from './corner';
+import Edge from './edge';
+import Tile from './tile';
 
 class Grid {
     constructor(lod) {

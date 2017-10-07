@@ -10,13 +10,11 @@ function getConfig(options) {
             index: path.resolve(__dirname, 'index.js')
         },
         output: {
-            path: __dirname + '/build',
+            path: __dirname + '/bin',
             filename: `[name].${options.target}.js`
         },
         resolve: {
             modules: [
-                path.resolve(__dirname),
-                path.resolve(__dirname, 'classes'),
                 path.resolve(__dirname, 'node_modules')
             ]
         },

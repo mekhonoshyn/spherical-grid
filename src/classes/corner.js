@@ -1,6 +1,6 @@
 'use strict';
 
-import Vector3 from 'vector3';
+import Vector3 from './vector3';
 
 class Corner {
     constructor(id) {

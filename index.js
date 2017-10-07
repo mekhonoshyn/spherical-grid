@@ -13,7 +13,7 @@
 * */
 
 import fs from 'fs';
-import generator from 'src/generator';
+import generator from './src/generator';
 
 if (require.main === module) {
     const config = process.argv.slice(2).reduce((accumulator, arg) => {

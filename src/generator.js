@@ -1,9 +1,8 @@
 'use strict';
 
-import profiler from 'profiler/profiler';
-
-import Grid from 'classes/grid';
-import Stack from 'utils/stack';
+import profiler from './profiler/profiler';
+import Grid from './classes/grid';
+import Stack from './utils/stack';
 
 const x = -0.525731112119133606;
 const z = -0.850650808352039932;

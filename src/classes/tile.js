@@ -1,8 +1,8 @@
 'use strict';
 
-import Corner from 'corner';
+import Corner from './corner';
 import Stack from '../utils/stack';
-import Vector3 from 'vector3';
+import Vector3 from './vector3';
 
 class Tile {
     constructor(id, edgesCount) {
