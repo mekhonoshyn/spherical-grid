@@ -50,7 +50,10 @@ function initializer({profile} = {}) {
         addEdge: utility($addEdge)
     });
 
-    return api.generate;
+    return {
+        generate: api.generate,
+        subdivideGrid: api.subdivideGrid
+    };
 }
 
 function $generate(lod = 0) {
