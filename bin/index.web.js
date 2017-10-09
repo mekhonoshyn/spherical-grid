@@ -1543,6 +1543,10 @@ exports.f = __webpack_require__(7) ? gOPD : function getOwnPropertyDescriptor(O,
 *   -   fix
 * */
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _stringify = __webpack_require__(63);
 
 var _stringify2 = _interopRequireDefault(_stringify);
@@ -1583,7 +1587,7 @@ if (__webpack_require__.c[__webpack_require__.s] === module) {
     if (typeof config.help !== 'undefined') {
         console.log('show help');
 
-        print(config);
+        printOut(config);
 
         process.exit();
     }
@@ -1595,13 +1599,12 @@ if (__webpack_require__.c[__webpack_require__.s] === module) {
     if (typeof config.output === 'string') {
         _fs2.default.writeFileSync(config.output, (0, _stringify2.default)(output), 'utf8');
     } else {
-        print(output);
+        printOut(output);
     }
-} else {
-    module.exports = {
-        generator: _generator2.default
-    };
 }
+
+exports.default = _generator2.default;
+
 
 function tilesStats(grid, config) {
     return {
@@ -1648,7 +1651,7 @@ function toThreeJs(grid, config) {
     return threeData;
 }
 
-function print(data) {
+function printOut(data) {
     console.log((0, _stringify2.default)(data));
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)(module), __webpack_require__(62)))
@@ -2296,7 +2299,10 @@ function initializer() {
         addEdge: utility($addEdge)
     });
 
-    return api.generate;
+    return {
+        generate: api.generate,
+        subdivideGrid: api.subdivideGrid
+    };
 }
 
 function $generate() {

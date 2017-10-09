@@ -25,7 +25,7 @@ if (require.main === module) {
     if (typeof config.help !== 'undefined') {
         console.log('show help');
 
-        print(config);
+        printOut(config);
 
         process.exit();
     }
@@ -37,13 +37,11 @@ if (require.main === module) {
     if (typeof config.output === 'string') {
         fs.writeFileSync(config.output, JSON.stringify(output), 'utf8');
     } else {
-        print(output);
+        printOut(output);
     }
-} else {
-    module.exports = {
-        generator
-    };
 }
+
+export default generator;
 
 function tilesStats(grid, config) {
     return {
@@ -79,6 +77,6 @@ function toThreeJs(grid, config) {
     return threeData;
 }
 
-function print(data) {
+function printOut(data) {
     console.log(JSON.stringify(data));
 }
