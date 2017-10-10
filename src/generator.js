@@ -42,7 +42,7 @@ function initializer({profile} = {}) {
     const {entryPoint, utility} = profiler(profile);
 
     Object.assign(api, {
-        generate: entryPoint($generate),
+        generateGrid: entryPoint($generateGrid),
         createNLevelGrid: utility($createNLevelGrid),
         create0LevelGrid: utility($create0LevelGrid),
         subdivideGrid: utility($subdivideGrid),
@@ -51,12 +51,12 @@ function initializer({profile} = {}) {
     });
 
     return {
-        generate: api.generate,
+        generateGrid: api.generateGrid,
         subdivideGrid: api.subdivideGrid
     };
 }
 
-function $generate(lod = 0) {
+function $generateGrid(lod = 0) {
     return lod
         ? api.createNLevelGrid(lod)
         : api.create0LevelGrid(lod);
