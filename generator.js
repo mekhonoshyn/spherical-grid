@@ -1,5 +1,5 @@
 'use strict';
 
-import generator from './src/generator';
+import GridFactory from './src/generator';
 
-export {generator};
+export {GridFactory};

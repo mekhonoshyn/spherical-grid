@@ -3,7 +3,7 @@
 'use strict';
 
 const commandLineArgs = require('command-line-args');
-const {generator} = require('../bin/generator');
+const {GridFactory} = require('../bin/generator');
 const {Stack, Vector3} = require('../bin/classes');
 const {printOut} = require('./cmd-line-utils');
 const profilerSettings = require('../src/profiler/settings.json');
@@ -15,7 +15,7 @@ const config = commandLineArgs([
 
 const Z_AXIS = new Vector3(0, 0, 1);
 
-const grid = generator(config.profile).generateGrid(config.lod);
+const grid = GridFactory(config.profile).generateGrid(config.lod);
 
 const output = tilesStats();
 

@@ -3,7 +3,7 @@
 'use strict';
 
 const commandLineArgs = require('command-line-args');
-const {generator} = require('../bin/generator');
+const {GridFactory} = require('../bin/generator');
 const {printOut} = require('./cmd-line-utils');
 const profilerSettings = require('../src/profiler/settings.json');
 
@@ -13,7 +13,7 @@ const config = commandLineArgs([
     {name: 'fix', type: Boolean, defaultValue: true}
 ]);
 
-const grid = generator(config.profile).generateGrid(config.lod);
+const grid = GridFactory(config.profile).generateGrid(config.lod);
 
 const output = toThreeJs2();
 

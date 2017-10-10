@@ -2617,7 +2617,7 @@ function utility(fn) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.generator = undefined;
+exports.GridFactory = undefined;
 
 var _generator = __webpack_require__(111);
 
@@ -2625,7 +2625,7 @@ var _generator2 = _interopRequireDefault(_generator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.generator = _generator2.default;
+exports.GridFactory = _generator2.default;
 
 /***/ }),
 /* 111 */
