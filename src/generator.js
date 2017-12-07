@@ -125,9 +125,8 @@ function $create0LevelGrid(lod) {
 }
 
 function $subdivideGrid({lod: sLod, tiles: sTiles, corners: sCorners}) {
-    const grid = new Grid(sLod + 1);
-    const {corners: dCorners, tiles: dTiles} = grid;
-
+    const dGrid = new Grid(sLod + 1);
+    const {corners: dCorners, tiles: dTiles} = dGrid;
     const {length: sTilesCount} = sTiles;
     const {length: sCornersCount} = sCorners;
 
@@ -162,7 +161,7 @@ function $subdivideGrid({lod: sLod, tiles: sTiles, corners: sCorners}) {
         const {id: dTileId, edgesCount: dTileEdgesCount, tiles: dTileTiles} = dTiles[sTileId];
 
         for (let k = 0; k < dTileEdgesCount; k++) {
-            api.addCorner(nextCornerId++, grid, dTileId, dTileTiles[k - 1].id, dTileTiles[k].id);
+            api.addCorner(nextCornerId++, dGrid, dTileId, dTileTiles[k - 1].id, dTileTiles[k].id);
         }
     });
 
@@ -179,12 +178,12 @@ function $subdivideGrid({lod: sLod, tiles: sTiles, corners: sCorners}) {
 
         for (let k = 0; k < dTileEdgesCount; k++) {
             if (!dTileEdges[k]) {
-                api.addEdge(nextEdgeId++, grid, dTileId, dTileTiles[k].id);
+                api.addEdge(nextEdgeId++, dGrid, dTileId, dTileTiles[k].id);
             }
         }
     });
 
-    return grid;
+    return dGrid;
 }
 
 function $addCorner(cornerId, {tiles, corners}, tileIndexA, tileIndexB, tileIndexC) {
