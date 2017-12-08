@@ -1,39 +1,13 @@
 'use strict';
 
+import VERTICES from './constants/icosahedron-vertices';
+import TILE_TILES from './constants/icosahedron-tile-tiles.json';
+import EDGE_TILES from './constants/icosahedron-edge-tiles.json';
+import CORNER_TILES from './constants/icosahedron-corner-tiles.json';
+
 import profiler from './profiler/profiler';
 import Grid from './classes/grid';
-import Stack from './utils/stack';
 
-const x = -0.525731112119133606;
-const z = -0.850650808352039932;
-const icosahedronVectors = [
-    [-x, 0, z],
-    [x, 0, z],
-    [-x, 0, -z],
-    [x, 0, -z],
-    [0, z, x],
-    [0, z, -x],
-    [0, -z, x],
-    [0, -z, -x],
-    [z, x, 0],
-    [-z, x, 0],
-    [z, -x, 0],
-    [-z, -x, 0]
-];
-const icosahedronTiles = [
-    new Stack(9, 4, 1, 6, 11),
-    new Stack(4, 8, 10, 6, 0),
-    new Stack(11, 7, 3, 5, 9),
-    new Stack(2, 7, 10, 8, 5),
-    new Stack(9, 5, 8, 1, 0),
-    new Stack(2, 3, 8, 4, 9),
-    new Stack(0, 1, 10, 7, 11),
-    new Stack(11, 6, 10, 3, 2),
-    new Stack(5, 3, 10, 1, 4),
-    new Stack(2, 5, 4, 0, 11),
-    new Stack(3, 7, 6, 1, 8),
-    new Stack(7, 2, 9, 0, 6)
-];
 const api = {};
 
 export default initializer;
@@ -72,36 +46,19 @@ function $create0LevelGrid(lod) {
     const grid = new Grid(lod);
     const {corners: dCorners, tiles: dTiles} = grid;
 
-    let nextEdgeId = 0;
-
     dTiles.forEach((dTile) => {
         const {id: dTileId, tiles: dTileTiles, vector: dTileVector} = dTile;
 
-        dTileVector.xyz = icosahedronVectors[dTileId];
+        dTileVector.xyz = VERTICES[dTileId];
 
         for (let k = 0; k < 5; k++) {
-            dTileTiles[k] = dTiles[icosahedronTiles[dTileId][k]];
+            dTileTiles[k] = dTiles[TILE_TILES[dTileId][k]];
         }
     });
 
-    for (let i = 0; i < 5; i++) {
-        api.addCorner(i, grid, 0, icosahedronTiles[0][i + 4], icosahedronTiles[0][i]);
-    }
-
-    for (let i = 0; i < 5; i++) {
-        api.addCorner(i + 5, grid, 3, icosahedronTiles[3][i + 4], icosahedronTiles[3][i]);
-    }
-
-    api.addCorner(10, grid, 10, 1, 8);
-    api.addCorner(11, grid, 1, 10, 6);
-    api.addCorner(12, grid, 6, 10, 7);
-    api.addCorner(13, grid, 6, 7, 11);
-    api.addCorner(14, grid, 11, 7, 2);
-    api.addCorner(15, grid, 11, 2, 9);
-    api.addCorner(16, grid, 9, 2, 5);
-    api.addCorner(17, grid, 9, 5, 4);
-    api.addCorner(18, grid, 4, 5, 8);
-    api.addCorner(19, grid, 4, 8, 1);
+    CORNER_TILES.forEach((tileIds, cornerId) => {
+        api.addCorner(cornerId, grid, ...tileIds);
+    });
 
     dCorners.forEach((dCorner) => {
         const {corners: dCornerCorners, tiles: dCornerTiles} = dCorner;
@@ -111,14 +68,8 @@ function $create0LevelGrid(lod) {
         }
     });
 
-    dTiles.forEach((dTile) => {
-        const {id: dTileId, edges: dTileEdges} = dTile;
-
-        for (let k = 0; k < 5; k++) {
-            if (!dTileEdges[k]) {
-                api.addEdge(nextEdgeId++, grid, dTileId, icosahedronTiles[dTileId][k]);
-            }
-        }
+    EDGE_TILES.forEach((tileIds, edgeId) => {
+        api.addEdge(edgeId, grid, ...tileIds);
     });
 
     return grid;
